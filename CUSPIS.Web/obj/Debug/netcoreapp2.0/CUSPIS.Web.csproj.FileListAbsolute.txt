@@ -1,0 +1,11 @@
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS.Web\bin\Debug\netcoreapp2.0\CUSPIS.Web.deps.json
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS.Web\bin\Debug\netcoreapp2.0\CUSPIS.Web.runtimeconfig.json
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS.Web\bin\Debug\netcoreapp2.0\CUSPIS.Web.runtimeconfig.dev.json
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS.Web\bin\Debug\netcoreapp2.0\CUSPIS.Web.dll
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS.Web\obj\Debug\netcoreapp2.0\CUSPIS.Web.csprojAssemblyReference.cache
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS.Web\obj\Debug\netcoreapp2.0\CUSPIS.Web.csproj.CoreCompileInputs.cache
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS.Web\obj\Debug\netcoreapp2.0\CUSPIS.Web.AssemblyInfoInputs.cache
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS.Web\obj\Debug\netcoreapp2.0\CUSPIS.Web.AssemblyInfo.cs
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS.Web\bin\Debug\netcoreapp2.0\CUSPIS.Web.pdb
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS.Web\obj\Debug\netcoreapp2.0\CUSPIS.Web.dll
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS.Web\obj\Debug\netcoreapp2.0\CUSPIS.Web.pdb

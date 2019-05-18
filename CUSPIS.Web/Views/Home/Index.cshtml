@@ -1,0 +1,230 @@
+﻿@model List<HomeIndexVM>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<style>
+    .inputclass {
+        width: 95%;
+        height: 100%;
+        border: 1px solid black;
+    }
+
+    .tiny {
+        width: 90px;
+        height: 50px;
+        border: 1px solid green;
+        padding: 5px;
+    }
+
+        .tiny:hover {
+            width: 170px;
+            height: 130px;
+            border: 3px solid gray;
+            margin-right: 2px;
+            color: red;
+        }
+</style>
+
+
+@if (Model.Count == 0)
+{
+    <h3>Nismo uspjeli pronaci nista sa vasom pretragom, pokusajte s drugim slovom...</h3>
+}
+
+    <div class="container" style="margin-top:15px" id="ajaxDiv">
+        <button class="btn-default" onclick="location.href=''">Pocetna</button>
+        <h3 class="error" id="allErrors"></h3>
+        <div class="row">
+            <h3>Filtriraj po pocetnom slovu Imena</h3>
+            <span class="tiny"><a onclick="FilterByName('A')">A</a></span>
+            <span class="tiny"><a onclick="FilterByName('B')">B</a></span>
+            <span class="tiny"><a onclick="FilterByName('C')">C</a></span>
+            <span class="tiny"><a onclick="FilterByName('D')">D</a></span>
+            <span class="tiny"><a onclick="FilterByName('E')">E</a></span>
+            <span class="tiny"><a onclick="FilterByName('F')">F</a></span>
+            <span class="tiny"><a onclick="FilterByName('G')">G</a></span>
+            <span class="tiny"><a onclick="FilterByName('H')">H</a></span>
+            <span class="tiny"><a onclick="FilterByName('I')">I</a></span>
+            <span class="tiny"><a onclick="FilterByName('J')">J</a></span>
+            <span class="tiny"><a onclick="FilterByName('K')">K</a></span>
+            <span class="tiny"><a onclick="FilterByName('L')">L</a></span>
+            <span class="tiny"><a onclick="FilterByName('M')">M</a></span>
+            <span class="tiny"><a onclick="FilterByName('N')">N</a></span>
+            <span class="tiny"><a onclick="FilterByName('O')">O</a></span>
+            <span class="tiny"><a onclick="FilterByName('P')">P</a></span>
+            <span class="tiny"><a onclick="FilterByName('Q')">Q</a></span>
+            <span class="tiny"><a onclick="FilterByName('R')">R</a></span>
+            <span class="tiny"><a onclick="FilterByName('S')">S</a></span>
+            <span class="tiny"><a onclick="FilterByName('T')">T</a></span>
+            <span class="tiny"><a onclick="FilterByName('U')">U</a></span>
+            <span class="tiny"><a onclick="FilterByName('V')">V</a></span>
+
+            <div class="col-md-4 col-md-offset-10">
+                <div class="input-group">
+                    <h3>Filtriraj po tipu osobe</h3>
+                    <label>Fizicko lice</label>
+                    <input type="radio" name="filterByRole" value="F" id="FF" onclick="FilterByRole(this.value,this.id)" />
+                    <br />
+                    <label>Pravno lice</label>
+                    <input type="radio" name="filterByRole" value="P" id="PP" onclick="FilterByRole(this.value,this.id)" />
+                </div>
+            </div>
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Naziv</th>
+                    <th>Mjesto-boravka</th>
+                    <th>Ulica</th>
+                    <th>Faks</th>
+                    <th>Telefon</th>
+                    <th>Fizicko/Pravno lice</th>
+                    <th>Privatni broj</th>
+                    <th>PIB</th>
+                    <th>Akcija</th>
+                </tr>
+            </thead>
+            <tbody>
+
+
+                @foreach (var person in Model)
+                {
+                    <tr>
+                        @{
+                            string Naziv = "Naziv" + person.Id;
+                            string NazivMjesta = "NazivMjesta" + person.Id;
+                            string Ulica = "Ulica" + person.Id;
+                            string Fax = "Fax" + person.Id;
+                            string Telefon = "Telefon" + person.Id;
+                            string Discriminator = "Discriminator" + person.Id;
+                            string TajniBroj = "TajniBroj" + person.Id;
+                            string PIB = "PIB" + person.Id;
+                        }
+                        <td><input class="inputclass" id="@Naziv" value="@person.Naziv" /></td>
+                        <td><input class="inputclass" id="@NazivMjesta" value="@person.NazivMjesta" readonly="readonly" /></td>
+                        <td><input class="inputclass" id="@Ulica" value="@person.Ulica" /></td>
+                        <td><input class="inputclass" id="@Fax" value="@person.Fax" /></td>
+                        <td><input class="inputclass" id="@Telefon" value="@person.Telefon" /></td>
+                        <td><input class="inputclass" id="@Discriminator" value="@person.Discriminator" readonly="readonly" /></td>
+                        <td><input class="inputclass" id="@TajniBroj" value="@person.TajniBroj" /></td>
+                        <td><input class="inputclass" id="@PIB" value="@person.PIB" /></td>
+                        <td>
+                            <a class="btn btn-danger" asp-action="DeletePerson" asp-controller="Home" asp-route-personId="@person.Id" asp-route-Discriminator="@person.Discriminator">
+                                Izbrisi
+                            </a><br /><br />
+                            <a class="btn btn-default" onclick="EditPerson(event,@person.Id)">
+                                Uredi
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+<script>
+    function EditPerson(e, Id) {
+        e.preventDefault();
+        var phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{3,6}$/;
+        var numbersRegex = /^[0-9]+$/;
+
+        var isValidated = true;
+
+        var name = $("#Naziv" + Id).val();
+        var id = Id;
+        var street = $("#Ulica" + Id).val();
+        var fax = $("#Fax" + Id).val();
+        var phone = $("#Telefon" + Id).val();
+        var discriminator = $("#Discriminator" + Id).val();
+        var secretnumber = $("#TajniBroj" + Id).val();
+        var pib = $("#PIB" + Id).val();
+
+        var errors = $("#allErrors");
+        var text = errors.text();
+
+        if (name == "" || name == null) {
+            $("#allErrors").html("Ime je obavezno");
+            isValidated = false;
+        }
+        if (street === "") {
+            text += "<br>Ulica je obavezna";
+            errors.html(text);
+            isValidated = false;
+        }
+        if (!phoneRegex.test(phone) && phone !== "") {
+            text += "<br>Morate unijeti telefon u odgovarajucem formatu.";
+            errors.html(text);
+            isValidated = false;
+        }
+        if (discriminator == "Fizicka" && pib !== "") {
+            text += "<br>Samo pib ide kod pravnih lica";
+            window.setTimeout(function () {
+                location.reload();
+            }, 2500);
+            errors.html(text);
+            isValidated = false;
+        }
+        if (discriminator == "Pravna" && secretnumber !== "") {
+            text += "<br>Samo tajni broj ide kod fizickih lica";
+            errors.html(text);
+            window.setTimeout(function () {
+                location.reload();
+            }, 1500);
+            isValidated = false;
+        }
+        else if (discriminator == "Pravna" && secretnumber == "") {
+            isValidated = true;
+        }
+        if (!phoneRegex.test(secretnumber) && secretnumber !== "") {
+            text += "<br>Morate unijeti tajni broj u odgovarajucem formatu";
+            isValidated = false;
+            errors.html(text);
+        }
+        if (!numbersRegex.test(pib) && pib !== "") {
+            isValidated = false;
+            text += "<br>Morate unijeti samo brojeve";
+        }
+        if (pib) {
+            if (pib.length > 13) {
+                isValidated = false;
+                tex += "<br>Ne vise od 13 brojeva";
+            }
+        }
+        if (isValidated) {
+            $.ajax({
+                type: "post",
+                url: "/Home/EditPerson?Naziv=" + name + "&" + "Ulica=" + street + "&" + "Fax=" + fax + "&" + "Telefon=" + phone + "&" + "Discriminator=" + discriminator
+                    + "&" + "TajniBroj=" + secretnumber + "&" + "PIB=" + pib + "&" + "Id=" + id,
+                success: function (data) {
+                    alert("Uspjesno izmjenjena kontakt osoba");
+                    location.href = "/Home/Index";
+                },
+                error: function () {
+                    alert("problem se desio, molimo strpite se");
+                }
+            });
+        }
+    }
+    function FilterByRole(value, id) {
+        if (!value) {
+            value = "";
+        }
+        $.ajax({
+            type: "get",
+            url: "/Home/Index?filterByRole=" + value,
+            success: function (data) {
+                $("#ajaxDiv").html(data);
+            }
+        });
+        $("#" + id).css("checked", "1");
+    }
+    function FilterByName(letter) {
+        $.ajax({
+            type: "get",
+            url: "/Home/Index?firstLetter=" + letter,
+            success: function (data) {
+                $("#ajaxDiv").html(data);
+            }
+        });
+    }
+
+</script>

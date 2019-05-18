@@ -1,0 +1,128 @@
+﻿@model HomeAddNewPersonVM
+@{
+    ViewData["Title"] = "AddNewPerson";
+}
+
+@Html.ValidationSummary()
+
+<div class="container" style="margin-top:50px;margin-left:40%">
+    <h2>Dodajte novu kontakt osobu</h2>
+    <form asp-action="AddNewPerson" id="addForm" asp-controller="Home" method="post">
+        <div class="input-group">
+            <label>Mjesto boravka</label>
+            <select asp-items="@Model.Cities" class="form-control" asp-for="CitieId"></select>
+        </div>
+        <div class="input-group">
+            <label>Tip osobe</label>
+            <select asp-items="@Model.TypeOfPerson" class="form-control" id="typeOfPersons" asp-for="TypeOfPersonId" onchange="changeFunction(value)"></select>
+        </div>
+        <div class="input-group">
+            <label>Naziv</label>
+            <input asp-for="Naziv" id="Naziv" name="Naziv" class="form-control" required="required" />
+        </div>
+        <div class="input-group">
+            <label>Email</label>
+            <input asp-for="Email" id="Email" class="form-control" />
+        </div>
+        <div class="input-group">
+            <label>Fax</label>
+            <input asp-for="Fax" class="form-control" />
+        </div>
+        <div class="input-group">
+            <label>Ulica</label>
+            <input asp-for="Ulica" id="Ulica" class="form-control" required="required" />
+        </div>
+        <div class="input-group">
+            <label>Telefon</label>
+            <input asp-for="Telefon" id="Telefon" class="form-control" required="required" /><br />
+        </div>
+        <div id="personNature" class="input-group">
+            <label>Tajni broj</label>
+            <input asp-for="TajniBroj" id="TajniBroj" class="form-control" />
+        </div>
+        <div id="legalPerson" class="input-group" style="display:none">
+            <label>Maticni broj</label>
+            <input asp-for="MaticniBroj" id="MaticniBroj" class="form-control" required="required" />
+            <div class="input-group">
+                <label>Poreski Broj</label>
+                <input asp-for="PIB" id="PIB" class="form-control" required="required" />
+            </div>
+        </div>
+        <div class="input-group">
+            <button type="submit"  class="btn btn success" style="margin:15px">Dodaj kontakt osobu</button>
+        </div>
+    </form>
+</div>
+<script>
+    function changeFunction(value) {
+        if (value == "2") {
+            $("#legalPerson").show();
+            $("#personNature").hide();
+        }
+        else if (value == "1") {
+            $("#personNature").show();
+            $("#legalPerson").hide();
+        }
+    }
+    $(document).ready(function () {
+        $("#addForm").validate({
+            rules: {
+                "Telefon": {
+                    required: true,
+                    phoneUS: true
+                },
+                "Email": {
+                    email:true
+                },
+                "TajniBroj": {
+                    phoneUS:true
+                },
+                "Naziv": {
+                    required: true
+                },
+                "Ulica": {
+                    required: true
+                },
+                "MaticniBroj": {
+                    maxlength: 8,
+                    required: true,
+                    number:true
+                },
+                "PIB": {
+                    maxnlength: 13,
+                    required: true,
+                    number:true
+                }
+            },
+            messages: {
+                "Naziv": {
+                    required: "Molimo unesite naziv kontakt osobe"
+                },
+                "Email": {
+                    email:"Molimo unesite email u formatu za email"
+                },
+                "TajniBroj": {
+                    phoneUS:"Molimo unestie kontakt telefon  u formatu"
+                },
+                "Ulica": {
+                    required: "Molimo unesite ulicu stanovanja/rada"
+                },
+                "Telefon": {
+                    required: "Molimo unesite kontakt telefon",
+                    phoneUS: "Molimo unesite telefon u formatu"
+                },
+                "MaticniBroj": {
+                    maxlength: "Ne vise od 8 karakter",
+                    required: "Molimo unestie maticni broj ustanove",
+                    number:"Samo brojeve molimo unesite"
+                },
+                "PIB": {
+                    maxlength: "Ne vise od 13 karakter",
+                    required: "Molimo unestie PIB broj ustanove",
+                    number: "Samo brojeve molimo unesite"
+                }
+            }
+        });
+    });
+</script>
+

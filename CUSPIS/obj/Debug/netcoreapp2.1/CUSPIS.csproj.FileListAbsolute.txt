@@ -1,0 +1,11 @@
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS\bin\Debug\netcoreapp2.1\CUSPIS.deps.json
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS\bin\Debug\netcoreapp2.1\CUSPIS.runtimeconfig.json
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS\bin\Debug\netcoreapp2.1\CUSPIS.runtimeconfig.dev.json
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS\bin\Debug\netcoreapp2.1\CUSPIS.dll
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS\bin\Debug\netcoreapp2.1\CUSPIS.pdb
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS\obj\Debug\netcoreapp2.1\CUSPIS.csprojAssemblyReference.cache
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS\obj\Debug\netcoreapp2.1\CUSPIS.csproj.CoreCompileInputs.cache
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS\obj\Debug\netcoreapp2.1\CUSPIS.AssemblyInfoInputs.cache
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS\obj\Debug\netcoreapp2.1\CUSPIS.AssemblyInfo.cs
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS\obj\Debug\netcoreapp2.1\CUSPIS.dll
+C:\Users\NonRoot\source\repos\CUSPIS\CUSPIS\obj\Debug\netcoreapp2.1\CUSPIS.pdb
